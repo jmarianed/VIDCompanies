@@ -152,6 +152,15 @@
             {name: "MIDLAND EXPLORATION INC.*", ticker: "TSX-V: MD", type: "EXPLORER", location: "CANADA/QC", commodities: "Au, PGE", website: "https://midlandexploration.com/en/"},
    // Add more companies here...
         ];
+    window.onload = () => {
+        // Sort companies alphabetically by name on initial load
+        companies.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+
+        companies.sortedColumn = 0; // Indicate the "name" column is sorted
+        companies.sortedAscending = true; // Indicate the sort is ascending
+        drawTable(); // Draw the sorted table
+        drawPagination(); // Draw pagination
+    };
 
         const rowsPerPage = 10; // Number of rows to display per page
         let currentPage = 1;
@@ -218,12 +227,16 @@
             drawTable();
         }
 
-        window.onload = () => {
-            companies.sortedColumn = null;
-            companies.sortedAscending = true;
-            drawTable();
-            drawPagination();
-        };
+
+    window.onload = () => {
+        // Sort companies alphabetically by name on initial load
+        companies.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+
+        companies.sortedColumn = 0; // Indicate the "name" column is sorted
+        companies.sortedAscending = true; // Indicate the sort is ascending
+        drawTable(); // Draw the sorted table
+        drawPagination(); // Draw pagination
+    };
     </script>
 </body>
 </html>
