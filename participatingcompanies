@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Table</title>
+    <style>
+        .sort-button {
+            width: 100%;
+            color: white;
+            background-color: black;
+            border: none;
+            padding: 8px;
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer; 
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="customTableContainer" style="width:100%; margin:auto; overflow-x:auto;">
+        <div style="overflow-x:auto;">
+            <table id="companyTable" style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <th style="text-align: left;"><button class="sort-button" onclick="sortTable(0)">Company Name ⇅</button></th>
+                    <th style="text-align: left;"><button class="sort-button" onclick="sortTable(1)">Ticker ⇅</button></th>
+                    <th style="text-align: left;"><button class="sort-button" onclick="sortTable(2)">Type ⇅</button></th>
+                    <th style="text-align: left;"><button class="sort-button" onclick="sortTable(3)">Location ⇅</button></th>
+                    <th style="text-align: left;"><button class="sort-button" onclick="sortTable(4)">Commodities ⇅</button></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        var companies = [
+            {name: "1911 GOLD MINING*", ticker: "TSX-V: AUMB", type: "PRODUCER", location: "CANADA/ON, MB", commodities: "Au", website: "https://www.1911gold.com"},
+            {name: "ABCOURT MINES INC. *", ticker: "TSX-V: ABI; OTCQB: ABMBF", type: "DEVELOPER", location: "CANADA/QC", commodities: "Au", website: "https://abcourt.ca/en/"},
+            {name: "ABITIBI METALS#", ticker: "CSE: AMQ; OTCQB: AMQFF", type: "EXPLORER", location: "CANADA/QC", commodities: "Cu", website: "https://abitibimetals.com"},
+            {name: "ABRA SILVER RESOURCE CORP.", ticker: "TSX-V: ABRA; OTCQX: ABBRF", type: "DEVELOPER", location: "ARGENTINA", commodities: "Au, Ag", website: "https://www.abrasilver.com"},
+            {name: "ADYTON RESOURCES CORPORATION", ticker: "TSX-V: ADY", type: "DEV/EXPL", location: "PAPUA NEW GUINEA", commodities: "Cu, Au", website: "https://adytonresources.com"},
+            {name: "AGNICO EAGLE MINES LIMITED", ticker: "TSX: AEM; NYSE: AEM", type: "PRODUCER", location: "GLOBAL", commodities: "Au", website: "https://agnicoeagle.com/English/home/default.aspx"},
+            {name: "AMEX EXPLORATION INC.", ticker: "TSX-V: AMX; OTCQX: AMXEF", type: "EXPLORER", location: "CANADA/QC", commodities: "Au", website: "https://www.amexexploration.com"},
+            {name: "ANDEAN PRECIOUS METALS CORP.", ticker: "TSX-V: APM; OTCQX: ANPMF", type: "PRODUCER", location: "USA/CA; MEXICO; BOLIVIA", commodities: "Au, Ag", website: "https://andeanpm.com"},
+            {name: "ARIZONA METALS CORP", ticker: "TSX: AMC; OTCQX: AZMCF", type: "EXPLORER", location: "USA/AZ", commodities: "Au, Cu", website: "https://www.arizonametalscorp.com"},
+            {name: "ATHA ENERGY CORP", ticker: "TSX-V: SASK; OTCQB: SASKF", type: "DEV/EXPL", location: "CANADA/NV, SK", commodities: "U308", website: "https://athaenergy.com"},
+            {name: "AURANIA RESOURCES LTD.*", ticker: "TSX-V: ARU; OTCQB: AUIAF", type: "EXPLORER", location: "ECUADOR", commodities: "Au", website: "https://aurania.com"},
+            {name: "BLUE THUNDER MINING INC.^^", ticker: "TSX-V: BLUE", type: "EXPLORER", location: "CANADA/QC", commodities: "Au, Base Metals", website: "https://bluethundermining.com"},
+            {name: "GRID METALS CORP^^", ticker: "TSX-V: GRDM; OTCQB: MSMGF", type: "EXPLORER", location: "CANADA/MN", commodities: "Li, Cu, Ni", website: "https://gridmetalscorp.com/"},
+            {name: "WESTERN ALASKA MINERALS CORP*", ticker: "TSX-V: WAM", type: "EXPLORER", location: "USA/ALASKA", commodities: "Au, Ag, Cu, Pb, Zn, Mo", website: "https://westernalaskaminerals.com"}
+            // Add more companies here...
+        ];
+
+        function drawTable() {
+            var table = document.getElementById("companyTable");
+
+            // Clear existing rows (except for the header)
+            table.innerHTML += companies.map(company => `
+                <tr>
+                    <td><a href="${company.website}" target="_blank">${company.name}</a></td>
+                    <td>${company.ticker}</td>
+                    <td>${company.type}</td>
+                    <td>${company.location}</td>
+                    <td>${company.commodities}</td>
+                </tr>
+            `).join('');
+        }
+
+        function sortTable(columnIndex) {
+            let ascending = companies.sortedColumn === columnIndex ? !companies.sortedAscending : true;
+
+            companies.sort((a, b) => {
+                let valueA, valueB;
+                switch (columnIndex) {
+                    case 0: valueA = a.name.toLowerCase(); valueB = b.name.toLowerCase(); break;
+                    case 1: valueA = a.ticker.toLowerCase(); valueB = b.ticker.toLowerCase(); break;
+                    case 2: valueA = a.type.toLowerCase(); valueB = b.type.toLowerCase(); break;
+                    case 3: valueA = a.location.toLowerCase(); valueB = b.location.toLowerCase(); break;
+                    case 4: valueA = a.commodities.toLowerCase(); valueB = b.commodities.toLowerCase(); break;
+                }
+                return ascending ? (valueA > valueB ? 1 : -1) : (valueA < valueB ? 1 : -1);
+            });
+
+            companies.sortedColumn = columnIndex;
+            companies.sortedAscending = ascending;
+            drawTable();
+        }
+
+        window.onload = function () {
+            companies.sortedColumn = null;
+            companies.sortedAscending = true;
+            drawTable();
+        };
+    </script>
+</body>
+</html>
