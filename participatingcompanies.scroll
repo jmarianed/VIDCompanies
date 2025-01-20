@@ -1,36 +1,51 @@
-<div id="customTableContainer" style="width:100%; margin:auto; overflow-x:auto;">
-  <div style="overflow-x:auto;">
-    <table id="companyTable" style="width: 100%; border-collapse: collapse;">
-      <tr>
-        <th style="text-align: left;"><button class="sort-button" onclick="sortTable(0)">Company Name ⇅</button></th>
-        <th style="text-align: left;"><button class="sort-button" onclick="sortTable(1)">Ticker ⇅</button></th>
-        <th style="text-align: left;"><button class="sort-button" onclick="sortTable(2)">Type ⇅</button></th>
-        <th style="text-align: left;"><button class="sort-button" onclick="sortTable(3)">Location ⇅</button></th>
-        <th style="text-align: left;"><button class="sort-button" onclick="sortTable(4)">Commodities ⇅</button></th>
-      </tr>
-    </table>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Table with Scroll</title>
+    <style>
+        .sort-button {
+            width: 100%;
+            color: white;
+            background-color: black;
+            border: none;
+            padding: 8px;
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            cursor: pointer; 
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: black;
+            color: white;
+            border: none;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .scroll-container {
+            height: 400px;
+            overflow-y: auto;
+            margin: auto;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="customTableContainer" class="scroll-container">
+        <table id="companyTable"></table>
+    </div>
 
-<style>
-.sort-button {
-  width: 100%;
-  color: white;
-  background-color: black;
-  border: none;
-  padding: 8px;
-  text-align: left;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px;
-  margin: 4px 2px;
-  cursor: pointer; 
-  font-weight: bold;
-}
-</style>
-
-<script>
-        var companies = [
+    <script>
+       var companies = [
             {name: "1911 GOLD MINING*", ticker: "TSX-V: AUMB", type: "PRODUCER", location: "CANADA/ON, MB", commodities: "Au", website: "https://www.1911gold.com"},
             {name: "ABCOURT MINES INC. *", ticker: "TSX-V: ABI; OTCQB: ABMBF", type: "DEVELOPER", location: "CANADA/QC", commodities: "Au", website: "https://abcourt.ca/en/"},
             {name: "ABITIBI METALS#", ticker: "CSE: AMQ; OTCQB: AMQFF", type: "EXPLORER", location: "CANADA/QC", commodities: "Cu", website: "https://abitibimetals.com"},
@@ -60,6 +75,8 @@
             {name: "FIRST MINING GOLD CORP", ticker: "TSX: FF; OTCQX: FFMGF", type: "DEV/EXPL", location: "CANADA/ON, QC, NFLD", commodities: "Au", website: "https://firstmininggold.com"},
             {name: "STRIKEPOINT GOLD INC.^^", ticker: "TSX-V: SKP; OTCQB: STKXF", type: "EXPLORER", location: "CANADA/BC; USA/NV", commodities: "Au, Ag", website: "https://strikepointgold.com"},
             {name: "GRID METALS CORP^^", ticker: "TSX-V: GRDM; OTCQB: MSMGF", type: "EXPLORER", location: "CANADA/MN", commodities: "Li, Cu, Ni", website: "https://gridmetalscorp.com/"},
+            {name: "WESTERN ALASKA MINERALS CORP*", ticker: "TSX-V: WAM", type: "EXPLORER", location: "USA/ALASKA", commodities: "Au, Ag, Cu, Pb, Zn, Mo", website: "https://westernalaskaminerals.com"},
+            {name: "FPX NICKEL CORP.", ticker: "TSX-V: FPX; OTCQB: FPOCF", type: "EXPLORER", location: "CANADA/BC, YK", commodities: "Ni", website: "https://fpxnickel.com"},
             {name: "GLENCORE PLC / GLENCORE CANADA", ticker: "LSE: GLEN; JSE: GLN", type: "PRODUCER", location: "CANADA/GLOBAL", commodities: "Cu, Ni, Zn, Pb", website: "https://www.glencore.ca/en/"},
             {name: "GO METALS CORP.^^", ticker: "CSE: GOCO", type: "EXPLORER", location: "CANADA/QC", commodities: "Cu, Ni", website: "https://gometals.ca"},
             {name: "GOLD ROYALTY CORP", ticker: "NYSE: GROY", type: "ROYALTY", location: "GLOBAL", commodities: "Royalties", website: "https://www.goldroyalty.com"},
@@ -72,10 +89,11 @@
             {name: "MAJOR DRILLING*", ticker: "TSX: MDI", type: "EXPLORER", location: "GLOBAL", commodities: "GLOBAL", website: "https://www.majordrilling.com"},
             {name: "MAPLE GOLD MINES LTD", ticker: "TSX-V: MGM; OTCQB: MGMLF", type: "DEV/EXPL", location: "CANADA/QC", commodities: "Au", website: "https://www.maplegoldmines.com/index.php/en/"},
             {name: "MARITIME RESOURCES CORP", ticker: "TSX-V: MAE", type: "DEV/EXPL", location: "CANADA/NFLD", commodities: "Au", website: "https://maritimeresourcescorp.com"},
+            {name: "MIDLAND EXPLORATION INC.*", ticker: "TSX-V: MD", type: "EXPLORER", location: "CANADA/QC", commodities: "Au, PGE's", website: "https://midlandexploration.com/en/"},
             {name: "MINEROS S.A.", ticker: "TSX: MSA", type: "PRODUCER", location: "COLOMBIA; CHILE; NICARAGUA", commodities: "Au", website: "https://mineros.com.co/en/"},
             {name: "NEW GOLD INC.", ticker: "TSX: NGD; NYSE: NGD", type: "PRODUCER", location: "CANADA/ON, BC", commodities: "Au", website: "https://newgold.com/home/default.aspx"},
             {name: "NIOBAY METALS INC.^^#", ticker: "TSX-V: NBY; OTCQB: NBYCF", type: "EXPLORER", location: "CANADA/QC, ON", commodities: "Nb, Ti, Ta", website: "https://niobaymetals.com/en/"},
-            {name: "NUVAU MINERALS CORP.*", ticker:"TSX-V: NMC", type: "EXPLORER", location: "CANADA/QC", commodities: "Zn, Cu", website: "https://nuvauminerals.com"},
+            {name: "NUVAU MINERALS CORP.*", ticker:"TSX-V: NMC", type: "EXPLORER", location: "CANADA/QC", commodities: "Zn, Cu", website: "http://nuvauminerals.com"},
             {name: "OSISKO DEVELOPMENT CORP.", ticker: "TSX-V: ODV; NYSE: ODV", type: "PRODUCER", location: "CANADA/BC; USA/UTAH", commodities: "Au", website: "https://osiskodev.com"},
             {name: "OSISKO GOLD ROYALTIES LTD.", ticker: "TSX: OR; NYSE: OR", type: "ROYALTY", location: "GLOBAL", commodities: "Royalties", website: "https://osiskogr.com/en/"},
             {name: "OSISKO METALS INCORPORATED#", ticker: "TSX-V: OM; OTCQX: OMZNF", type: "DEVELOPER", location: "CANADA/QC, NT", commodities: "Cu, Zn", website: "https://osiskometals.com/"},
@@ -125,93 +143,55 @@
             {name: "MANDALAY RESOURCES CORPORATION", ticker: "TSX: MND; OTCQB: MNDJF", type: "PRODUCER", location: "SWEDEN, AUSTRALIA", commodities: "Au, Sb", website: "https://mandalayresources.com/"},
             {name: "SILVER X MINING CORP.*", ticker: "TSX-V: AGX; OTCQB: AGXPF", type: "PRODUCER", location: "PERU", commodities: "Ag, Au, Zn, Pb", website: "https://www.silverxmining.com/"},
             {name: "KUYA SILVER CORPORATION*", ticker: "CSE: KUYA; OTCQB: KUYAF", type: "DEV/EXPL", location: "CANADA/ON; PERU", commodities: "Ag", website: "https://www.kuyasilver.com/index.php"},
-            {name: "DUMONT NICKEL", ticker: "PRIVATE", type: "DEVELOPER", location: "CANADA/QC", commodities: "Ni", website: "https://www.dumontnickel.com"},  
-            {name: "WESTERN ALASKA MINERALS CORP*", ticker: "TSX-V: WAM", type: "EXPLORER", location: "USA/ALASKA", commodities: "Au, Ag, Cu, Pb, Zn, Mo", website: "https://westernalaskaminerals.com"},
-            {name: "FPX NICKEL CORP.", ticker: "TSX-V: FPX; OTCQB: FPOCF", type: "EXPLORER", location: "CANADA/BC, YK", commodities: "Ni", website: "https://fpxnickel.com"},
-            {name: "MIDLAND EXPLORATION INC.*", ticker: "TSX-V: MD", type: "EXPLORER", location: "CANADA/QC", commodities: "Au, PGE", website: "https://midlandexploration.com/en/"},
-   // Add more companies here...
-        ];
+            {name: "DUMONT NICKEL", ticker: "PRIVATE", type: "DEVELOPER", location: "CANADA/QC", commodities: "Ni", website: "https://www.dumontnickel.com"}  
+            // Add more companies...
+            ];
 
-function drawTable() {
-  var table = document.getElementById("companyTable");
+        function drawTable() {
+            const table = document.getElementById("companyTable");
+            table.innerHTML = `
+                <tr>
+                    <th><button class="sort-button" onclick="sortTable(0)">Company Name ⇅</button></th>
+                    <th><button class="sort-button" onclick="sortTable(1)">Ticker ⇅</button></th>
+                    <th><button class="sort-button" onclick="sortTable(2)">Type ⇅</button></th>
+                    <th><button class="sort-button" onclick="sortTable(3)">Location ⇅</button></th>
+                    <th><button class="sort-button" onclick="sortTable(4)">Commodities ⇅</button></th>
+                </tr>
+            `;
 
-  // Clear existing rows (except for the header)
-  table.innerHTML = `
-    <tr>
-      <th style="text-align: left;"><button class="sort-button" onclick="sortTable(0)">Company Name ⇅</button></th>
-      <th style="text-align: left;"><button class="sort-button" onclick="sortTable(1)">Ticker ⇅</button></th>
-      <th style="text-align: left;"><button class="sort-button" onclick="sortTable(2)">Type ⇅</button></th>
-      <th style="text-align: left;"><button class="sort-button" onclick="sortTable(3)">Location ⇅</button></th>
-      <th style="text-align: left;"><button class="sort-button" onclick="sortTable(4)">Commodities ⇅</button></th>
-    </tr>
-  `;
+            table.innerHTML += companies.map(company => `
+                <tr>
+                    <td><a href="${company.website}" target="_blank">${company.name}</a></td>
+                    <td>${company.ticker}</td>
+                    <td>${company.type}</td>
+                    <td>${company.location}</td>
+                    <td>${company.commodities}</td>
+                </tr>
+            `).join('');
+        }
 
-  for (var i = 0; i < companies.length; i++) {
-    var company = companies[i];
-    var row = `
-      <tr>
-        <td><a href="${company.website}" target="_blank">${company.name}</a></td>
-        <td>${company.ticker}</td>
-        <td>${company.type}</td>
-        <td>${company.location}</td>
-        <td>${company.commodities}</td>
-      </tr>
-    `;
-    table.innerHTML += row;
-  }
-}
+        function sortTable(columnIndex) {
+            let ascending = companies.sortedColumn === columnIndex ? !companies.sortedAscending : true;
 
-function sortTable(columnIndex) {
-  var ascending = true;
+            companies.sort((a, b) => {
+                let valueA = Object.values(a)[columnIndex].toLowerCase();
+                let valueB = Object.values(b)[columnIndex].toLowerCase();
+                return ascending ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+            });
 
-  // Check if the column is currently sorted
-  if (companies.sortedColumn === columnIndex) {
-    ascending = !companies.sortedAscending;
-  }
+            companies.sortedColumn = columnIndex;
+            companies.sortedAscending = ascending;
+            drawTable();
+        }
 
-  // Sort the companies array based on the specified column
-  companies.sort(function(a, b) {
-    var valueA, valueB;
-    switch (columnIndex) {
-      case 0:
-        valueA = a.name.toLowerCase();
-        valueB = b.name.toLowerCase();
-        break;
-      case 1:
-        valueA = a.ticker.toLowerCase();
-        valueB = b.ticker.toLowerCase();
-        break;
-      case 2:
-        valueA = a.type.toLowerCase();
-        valueB = b.type.toLowerCase();
-        break;
-      case 3:
-        valueA = a.location.toLowerCase();
-        valueB = b.location.toLowerCase();
-        break;
-      case 4:
-        valueA = a.commodities.toLowerCase();
-        valueB = b.commodities.toLowerCase();
-        break;
-    }
-    return ascending ? (valueA < valueB ? -1 : (valueA > valueB ? 1 : 0)) : (valueA > valueB ? -1 : (valueA < valueB ? 1 : 0));
-  });
+        window.onload = () => {
+            // Sort alphabetically by the "name" column on page load
+            companies.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
 
-  // Update sorting status
-  companies.sortedColumn = columnIndex;
-  companies.sortedAscending = ascending;
-
-  drawTable();
-}
-
-window.onload = function() {
-  // Sort the companies array alphabetically by name
-  companies.sort(function(a, b) {
-    var nameA = a.name.toLowerCase();
-    var nameB = b.name.toLowerCase();
-    return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
-  });
-
-  drawTable();
-}
-</script>
+            companies.sortedColumn = 0; // Mark the "name" column as sorted
+            companies.sortedAscending = true; // Default sort direction is ascending
+            drawTable();
+        };
+    </script>
+</body>
+</html>
