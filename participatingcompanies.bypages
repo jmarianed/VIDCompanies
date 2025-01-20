@@ -84,14 +84,13 @@
             {name: "GLENCORE PLC / GLENCORE CANADA", ticker: "LSE: GLEN; JSE: GLN", type: "PRODUCER", location: "CANADA/GLOBAL", commodities: "Cu, Ni, Zn, Pb", website: "https://www.glencore.ca/en/"},
             {name: "GO METALS CORP.^^", ticker: "CSE: GOCO", type: "EXPLORER", location: "CANADA/QC", commodities: "Cu, Ni", website: "https://gometals.ca"},
             {name: "GOLD ROYALTY CORP", ticker: "NYSE: GROY", type: "ROYALTY", location: "GLOBAL", commodities: "Royalties", website: "https://www.goldroyalty.com"},
-            {name: "HOT CHILI  LTD.", ticker: "TSX-V: HCH; OTCQX: HHLKF", type: "DEVELOPER", location: "CHILE", commodities: "Cu", website: "https://www.hotchili.net.au"},
             {name: "i80 GOLD CORP", ticker: "TSX: IAU; NYSE: IAUX", type: "DEVELOPER", location: "USA/NV", commodities: "Au", website: "https://www.i80gold.com"},
             {name: "KENORLAND MINERALS LTD.", ticker: "TSX-V: KLD; OTCQX: KLDCF", type: "EXPLORER", location: "CANADA/QC", commodities: "Au", website: "https://www.kenorlandminerals.com"},
             {name: "KIRKLAND LAKE DISCOVERIES*", ticker: "TSX-V: KLDC", type: "EXPLORER", location: "CANADA/ON", commodities: "Au", website: "https://www.kirklandlakediscoveries.com"},
             {name: "LAVRAS GOLD CORP.", ticker: "TSX-V: LGC; OTCQX: LGCFF", type: "EXPLORER", location: "BRAZIL", commodities: "Au", website: "https://lavrasgold.com"},
             {name: "LITHIUM ROYALTY CORP", ticker: "TSX: LIRC; OTCQX: LITRF", type: "ROYALTY", location: "GLOBAL", commodities: "Royalties", website: "https://www.lithiumroyaltycorp.com/home/default.aspx"},
             {name: "MAJOR DRILLING*", ticker: "TSX: MDI", type: "EXPLORER", location: "GLOBAL", commodities: "GLOBAL", website: "https://www.majordrilling.com"},
-            {name: "MAPLE GOLD MINES LTD", ticker: "TSX-V: MGM; OTCQB: MGMLF", type: "DEV/EXPL", location: "CANADA/QC", commodities: "Au", website: "https://www.maplegoldmines.com/index.php/en/"},
+            {name: "MAPLE GOLD MINES LTD", ticker: "TSX-V: MGM; OTCQB: MGMLF", type: "EXPLORER", location: "CANADA/QC", commodities: "Au", website: "https://www.maplegoldmines.com/index.php/en/"},
             {name: "MARITIME RESOURCES CORP", ticker: "TSX-V: MAE", type: "DEV/EXPL", location: "CANADA/NFLD", commodities: "Au", website: "https://maritimeresourcescorp.com"},
             {name: "MINEROS S.A.", ticker: "TSX: MSA", type: "PRODUCER", location: "COLOMBIA; CHILE; NICARAGUA", commodities: "Au", website: "https://mineros.com.co/en/"},
             {name: "NEW GOLD INC.", ticker: "TSX: NGD; NYSE: NGD", type: "PRODUCER", location: "CANADA/ON, BC", commodities: "Au", website: "https://newgold.com/home/default.aspx"},
@@ -118,7 +117,7 @@
             {name: "TEMAS RESOURCES CORP*", ticker: "CSE: TMAS; OTCQB: TMASF", type: "EXPLORER", location: "CANADA/QC", commodities: "Ti", website: "https://temasresources.com/"},
             {name: "TROILUS GOLD CORP", ticker: "TSX: TLG; OTCQX: CHXMF", type: "DEV/EXPL", location: "CANADA/QC", commodities: "Au", website: "https://troilusgold.com/"},
             {name: "TRONIC METALS*", ticker: "PRIVATE", type: "EXPLORER", location: "AFRICA", commodities: "Co", website: "https://metaltronics.ca/"},
-            {name: "UNIGOLD INC.*", ticker: "TSX-V: UGD; OTCQB: UGDIF", type: "EXPLORER", location: "CARRIBEAN", commodities: "Au", website: "https://www.unigoldinc.com/"},
+            {name: "UNIGOLD INC.*", ticker: "TSX-V: UGD; OTCQX: UGDIF", type: "EXPLORER", location: "CARRIBEAN", commodities: "Au", website: "https://www.unigoldinc.com/"},
             {name: "VIZSLA SILVER CORP", ticker: "TSX-V: VZLA; NYSE: VZLA", type: "DEVELOPER", location: "MEXICO", commodities: "Ag", website: "https://vizslasilvercorp.com/"},
             {name: "WALLBRIDGE MINING COMPANY LIMITED", ticker: "TSX: WM; OTCQB: WLBMF", type: "EXPL/DEV", location: "CANADA/QC", commodities: "Au", website: "https://wallbridgemining.com/"},
             {name: "WESDOME GOLD MINES LTD.", ticker: "TSX: WDO; OTCQX: WDOFF", type: "PRODUCER", location: "CANADA/QC, ON", commodities: "Au", website: "https://www.wesdome.com/"},
@@ -141,7 +140,6 @@
             {name: "INTEGRA RESOURCES CORP.", ticker: "TSX-V: ITR; NYSE: ITRG", type: "PRODUCER", location: "USA, NEVADA", commodities: "Au", website: "https://integraresources.com/"},
             {name: "GOLDEN CARIBOO RESOURCES LTD^^", ticker: "CSE: GCC; OTCQB: GCCFF", type: "EXPLORER", location: "CANADA/BC", commodities: "Au", website: "https://goldencariboo.com"},
             {name: "MAGNA MINING INC.", ticker: "TSX-V: NICU; OTCQB: MGMNF", type: "DEV/EXPL", location: "CANADA/ON", commodities: "Ni, Cu", website: "https://magnamining.com/"},
-            {name: "ALLIED GOLD CORPORATION", ticker: "TSX: AAUC; OTCQX: AAUCF", type: "PRODUCER", location: "AFRICA", commodities: "Au", website: "https://alliedgold.com"},
             {name: "Q2 METALS CORP.", ticker: "TSX-V: QTWO; OTCQB: QUEXF", type: "EXPLORER", location: "CANADA/QC", commodities: "Li", website: "https://www.q2metals.com/"},
             {name: "MANDALAY RESOURCES CORPORATION", ticker: "TSX: MND; OTCQB: MNDJF", type: "PRODUCER", location: "SWEDEN, AUSTRALIA", commodities: "Au, Sb", website: "https://mandalayresources.com/"},
             {name: "SILVER X MINING CORP.*", ticker: "TSX-V: AGX; OTCQB: AGXPF", type: "PRODUCER", location: "PERU", commodities: "Ag, Au, Zn, Pb", website: "https://www.silverxmining.com/"},
@@ -150,6 +148,9 @@
             {name: "WESTERN ALASKA MINERALS CORP*", ticker: "TSX-V: WAM", type: "EXPLORER", location: "USA/ALASKA", commodities: "Au, Ag, Cu, Pb, Zn, Mo", website: "https://westernalaskaminerals.com"},
             {name: "FPX NICKEL CORP.", ticker: "TSX-V: FPX; OTCQB: FPOCF", type: "EXPLORER", location: "CANADA/BC, YK", commodities: "Ni", website: "https://fpxnickel.com"},
             {name: "MIDLAND EXPLORATION INC.*", ticker: "TSX-V: MD", type: "EXPLORER", location: "CANADA/QC", commodities: "Au, PGE", website: "https://midlandexploration.com/en/"},
+            {name: "FIRST PHOSPHATE CORP.#", ticker: "CSE: PHOS; OTCQB: FRSPF; FSE: KD0", type: "DEVELOPER", location: "CANADA/QC", commodities: "Battery, P2O5", website: "https://firstphosphate.com"},
+            {name: "NIOBAY METALS INC.^^#", ticker: "TSX-V: NBY; OTCQB: NBYCF", type: "EXPLORER", location: "CANADA/QC, ON", commodities: "Nb, Ti, Ta", website: "https://niobaymetals.com/en/"},
+
    // Add more companies here...
         ];
     window.onload = () => {
