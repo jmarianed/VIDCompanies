@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Table with Scroll</title>
+    <title>Company Table with Sticky Header</title>
     <style>
         .sort-button {
             width: 100%;
@@ -26,6 +26,9 @@
             background-color: black;
             color: white;
             border: none;
+            position: sticky;
+            top: 0;
+            z-index: 1;
         }
         td {
             padding: 10px;
@@ -45,7 +48,7 @@
     </div>
 
     <script>
-       var companies = [
+        var companies = [
             {name: "1911 GOLD MINING*", ticker: "TSX-V: AUMB", type: "PRODUCER", location: "CANADA/ON, MB", commodities: "Au", website: "https://www.1911gold.com"},
             {name: "ABCOURT MINES INC. *", ticker: "TSX-V: ABI; OTCQB: ABMBF", type: "DEVELOPER", location: "CANADA/QC", commodities: "Au", website: "https://abcourt.ca/en/"},
             {name: "ABITIBI METALS#", ticker: "CSE: AMQ; OTCQB: AMQFF", type: "EXPLORER", location: "CANADA/QC", commodities: "Cu", website: "https://abitibimetals.com"},
@@ -186,11 +189,9 @@
         }
 
         window.onload = () => {
-            // Sort alphabetically by the "name" column on page load
             companies.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-
-            companies.sortedColumn = 0; // Mark the "name" column as sorted
-            companies.sortedAscending = true; // Default sort direction is ascending
+            companies.sortedColumn = 0;
+            companies.sortedAscending = true;
             drawTable();
         };
     </script>
