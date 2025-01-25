@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Table with Scroll</title>
+    <title>Company Table with Sticky Header</title>
     <style>
         .sort-button {
             width: 100%;
@@ -26,6 +26,9 @@
             background-color: black;
             color: white;
             border: none;
+            position: sticky;
+            top: 0;
+            z-index: 1;
         }
         td {
             padding: 10px;
@@ -45,7 +48,7 @@
     </div>
 
     <script>
-       var companies = [
+        var companies = [
             {name: "1911 GOLD MINING*", ticker: "TSX-V: AUMB", type: "PRODUCER", location: "CANADA/ON, MB", commodities: "Au", website: "https://www.1911gold.com"},
             {name: "ABCOURT MINES INC. *", ticker: "TSX-V: ABI; OTCQB: ABMBF", type: "DEVELOPER", location: "CANADA/QC", commodities: "Au", website: "https://abcourt.ca/en/"},
             {name: "ABITIBI METALS#", ticker: "CSE: AMQ; OTCQB: AMQFF", type: "EXPLORER", location: "CANADA/QC", commodities: "Cu", website: "https://abitibimetals.com"},
@@ -65,7 +68,7 @@
             {name: "CANTERRA MINERALS CORPORATION*", ticker: "TSX-V: CTM; OTCQB: CTMCF", type: "EXPLORER", location: "CANADA/NFLD, AB", commodities: "Cu, Zi, Pb, Au", website: "https://canterraminerals.com/"},
             {name: "CAPITALIGHT CORP.*", ticker: "CSE: IC", type: "EXPLORER", location: "CANADA/QC", commodities: "Cu", website: "https://www.capitalight.co"},
             {name: "COLLECTIVE MINING LTD.", ticker: "TSX: CNL; NYSE: CNL", type: "EXPLORER", location: "COLOMBIA", commodities: "Au, Ag, Cu", website: "https://www.collectivemining.com"},
-            {name: "DORÉ COPPER MINING CORP.*", ticker: "TSX-V: DCMC; OTCQX: DRCMF", type: "DEV/EXPL", location: "CANADA/QC", commodities: "Au, Cu", website: "https://www.dorecopper.com/en/"},
+            {name: "CYGNUS METALS", ticker: "TSX-V: DCMC; OTCQX: DRCMF", type: "DEV/EXPL", location: "CANADA/QC", commodities: "Au, Cu", website: "https://www.dorecopper.com/en/"},
             {name: "DRYDEN GOLD * #", ticker: "TSX-V: DRY; OTCQB: DRYGF", type: "EXPLORER", location: "CANADA/ON", commodities: "Au", website: "https://drydengold.com"},
             {name: "E2GOLD INC. ∧ ∧", ticker: "TSX-V: ETU; OTCQB: ETUGF", type: "EXPLORER", location: "CANADA/ON", commodities: "Au", website: "http://www.e2gold.ca"},
             {name: "EMX ROYALTY CORPORATION", ticker: "TSX-V: EMX; NYSE: EMX", type: "ROYALTY", location: "GLOBAL", commodities: "Royalties", website: "https://emxroyalty.com"},
@@ -91,7 +94,6 @@
             {name: "MIDLAND EXPLORATION INC.*", ticker: "TSX-V: MD", type: "EXPLORER", location: "CANADA/QC", commodities: "Au, PGE's", website: "https://midlandexploration.com/en/"},
             {name: "MINEROS S.A.", ticker: "TSX: MSA", type: "PRODUCER", location: "COLOMBIA; CHILE; NICARAGUA", commodities: "Au", website: "https://mineros.com.co/en/"},
             {name: "NEW GOLD INC.", ticker: "TSX: NGD; NYSE: NGD", type: "PRODUCER", location: "CANADA/ON, BC", commodities: "Au", website: "https://newgold.com/home/default.aspx"},
-            {name: "NIOBAY METALS INC.^^#", ticker: "TSX-V: NBY; OTCQB: NBYCF", type: "EXPLORER", location: "CANADA/QC, ON", commodities: "Nb, Ti, Ta", website: "https://niobaymetals.com/en/"},
             {name: "NUVAU MINERALS CORP.*", ticker:"TSX-V: NMC", type: "EXPLORER", location: "CANADA/QC", commodities: "Zn, Cu", website: "http://nuvauminerals.com"},
             {name: "OSISKO DEVELOPMENT CORP.", ticker: "TSX-V: ODV; NYSE: ODV", type: "PRODUCER", location: "CANADA/BC; USA/UTAH", commodities: "Au", website: "https://osiskodev.com"},
             {name: "OSISKO GOLD ROYALTIES LTD.", ticker: "TSX: OR; NYSE: OR", type: "ROYALTY", location: "GLOBAL", commodities: "Royalties", website: "https://osiskogr.com/en/"},
@@ -144,8 +146,14 @@
             {name: "DUMONT NICKEL", ticker: "PRIVATE", type: "DEVELOPER", location: "CANADA/QC", commodities: "Ni", website: "https://www.dumontnickel.com"}, 
             {name: "FIRST PHOSPHATE CORP.#", ticker: "CSE: PHOS; OTCQB: FRSPF; FSE: KD0", type: "DEVELOPER", location: "CANADA/QC", commodities: "Battery, P2O5", website: "https://firstphosphate.com"},
             {name: "NIOBAY METALS INC.^^#", ticker: "TSX-V: NBY; OTCQB: NBYCF", type: "EXPLORER", location: "CANADA/QC, ON", commodities: "Nb, Ti, Ta", website: "https://niobaymetals.com/en/"},
-
-          // Add more companies...
+            {name: "DYNASTY GOLD CORP*", ticker: "TSX-V: DYG", type: "EXPLORER", location: "CANADA/ON, USA/NV", commodities: "Au", website: "https://dynastygoldcorp.com"},
+            {name: "EQUITY METALS CORPORATION*", ticker: "TSX-V: EQTY; OTCQB: EQMEF", type: "EXPL/DEV", location: "CANADA/BC", commodities: "Au, Ag", website: "https://equitymetalscorporation.com"},
+            {name: "HARFANG EXPLORATION INC^^", ticker: "TSX-V: HAR", type: "EXPLORER", location: "CANADA/ON, QC", commodities: "Au", website: "https://harfangexploration.com"},
+            {name: "JUNO CORP.*", ticker: "PRIVATE", type: "EXPLORER", location: "CANADA/ON", commodities: "Ni, Cu, PGE", website: "https://junocorp.com"},
+            {name: "STANDARD URANIUM LTD*", ticker: "TSX-V: STND; OTCQB: STTDF", type: "EXPL/DEV", location: "CANADA/SK", commodities: "U", website: "https://standarduranium.ca"},
+            {name: "YUKON METALS CORP*", ticker: "CSE: YMC; OTCQB: YMMCF", type: "EXPLORER", location: "CANADA/YK", commodities: "Cu, Au, Ag, Pb, Zn", website: "https://yukonmetals.com"}
+      
+// Add more companies...
               ];
 
         function drawTable() {
@@ -186,11 +194,9 @@
         }
 
         window.onload = () => {
-            // Sort alphabetically by the "name" column on page load
             companies.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-
-            companies.sortedColumn = 0; // Mark the "name" column as sorted
-            companies.sortedAscending = true; // Default sort direction is ascending
+            companies.sortedColumn = 0;
+            companies.sortedAscending = true;
             drawTable();
         };
     </script>
