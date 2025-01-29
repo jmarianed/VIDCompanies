@@ -1,50 +1,92 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Table with Sticky Header</title>
+    <title>Company Table - Full List</title>
     <style>
-        .sort-button {
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 8px;
+        }
+
+        .table-container {
             width: 100%;
-            color: white;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Sticky Header */
+        .table-header {
+            position: sticky;
+            top: 0;
             background-color: black;
-            border: none;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
             padding: 8px;
             text-align: left;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 20px;
-            cursor: pointer; 
-            font-weight: bold;
+            font-size: 18px;
+            z-index: 100;
         }
+
+        .header-cell {
+            flex: 1;
+            text-align: left;
+            padding: 8 px;
+        }
+
+        .sort-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 5px;
         }
-        th {
-            background-color: black;
-            color: white;
-            border: none;
-            position: sticky;
-            top: 0;
-            z-index: 1;
+
+        tbody {
+            width: 100%;
         }
+
+        tr {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
         td {
-            padding: 10px;
-            border: none;
-        }
-        .scroll-container {
-            height: 100%;
-            overflow-y: auto;
-            margin: auto;
-            border: none;
+            flex: 1;
+            padding: 12px;
+            border-bottom: 1px solid #ddd; /* Only bottom border */
         }
     </style>
 </head>
 <body>
-    <div id="customTableContainer" class="scroll-container">
-        <table id="companyTable"></table>
+
+    <div class="table-container">
+        <!-- Sticky Header at the top of the list -->
+        <div class="table-header">
+            <div class="header-cell"><button class="sort-button" onclick="sortTable(0)">Company Name ⇅</button></div>
+            <div class="header-cell"><button class="sort-button" onclick="sortTable(1)">Ticker ⇅</button></div>
+            <div class="header-cell"><button class="sort-button" onclick="sortTable(2)">Type ⇅</button></div>
+            <div class="header-cell"><button class="sort-button" onclick="sortTable(3)">Location ⇅</button></div>
+            <div class="header-cell"><button class="sort-button" onclick="sortTable(4)">Commodities ⇅</button></div>
+        </div>
+
+        <table>
+            <tbody id="companyTable"></tbody>
+        </table>
     </div>
 
     <script>
@@ -154,21 +196,11 @@
             {name: "YUKON METALS CORP*", ticker: "CSE: YMC; OTCQB: YMMCF", type: "EXPLORER", location: "CANADA/YK", commodities: "Cu, Au, Ag, Pb, Zn", website: "https://yukonmetals.com"}
       
 // Add more companies...
-              ];
+                 ];
 
         function drawTable() {
-            const table = document.getElementById("companyTable");
-            table.innerHTML = `
-                <tr>
-                    <th><button class="sort-button" onclick="sortTable(0)">Company Name ⇅</button></th>
-                    <th><button class="sort-button" onclick="sortTable(1)">Ticker ⇅</button></th>
-                    <th><button class="sort-button" onclick="sortTable(2)">Type ⇅</button></th>
-                    <th><button class="sort-button" onclick="sortTable(3)">Location ⇅</button></th>
-                    <th><button class="sort-button" onclick="sortTable(4)">Commodities ⇅</button></th>
-                </tr>
-            `;
-
-            table.innerHTML += companies.map(company => `
+            const tableBody = document.getElementById("companyTable");
+            tableBody.innerHTML = companies.map(company => `
                 <tr>
                     <td><a href="${company.website}" target="_blank">${company.name}</a></td>
                     <td>${company.ticker}</td>
@@ -194,11 +226,14 @@
         }
 
         window.onload = () => {
+            // Sort companies alphabetically by name on initial load
             companies.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+
             companies.sortedColumn = 0;
             companies.sortedAscending = true;
             drawTable();
         };
     </script>
+
 </body>
 </html>
