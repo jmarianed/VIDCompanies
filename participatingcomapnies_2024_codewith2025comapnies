@@ -1,0 +1,223 @@
+<div class="fe-block fe-block-51dd92724aad78e87cd0">
+  <div class="sqs-block code-block sqs-block-code" data-block-type="23" id="block-51dd92724aad78e87cd0">
+    <div class="sqs-block-content">
+      <div id="customTableContainer" style="width:100%; margin:auto; overflow-x:auto;">
+        <div style="overflow-x:auto;">
+          <table id="companyTable" style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr>
+                <th style="text-align: left;">
+                  <button class="sort-button" onclick="sortTable(0)">Company Name ⇅</button>
+                </th>
+                <th style="text-align: left;">
+                  <button class="sort-button" onclick="sortTable(1)">Ticker ⇅</button>
+                </th>
+                <th style="text-align: left;">
+                  <button class="sort-button" onclick="sortTable(2)">Type ⇅</button>
+                </th>
+                <th style="text-align: left;">
+                  <button class="sort-button" onclick="sortTable(3)">Location ⇅</button>
+                </th>
+                <th style="text-align: left;">
+                  <button class="sort-button" onclick="sortTable(4)">Commodities ⇅</button>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="companyTableBody">
+              <!-- Table rows will be populated here dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sort-button {
+    width: 100%;
+    color: white;
+    background-color: black;
+    border: none;
+    padding: 8px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+</style>
+
+<script>
+        var companies = [
+            {name: "ABCOURT MINES INC. *", ticker: "TSX-V: ABI; OTCQB: ABMBF", type: "DEVELOPER", location: "CANADA/QC", commodities: "Au", website: "https://abcourt.ca/en/"},
+            {name: "ABITIBI METALS#", ticker: "CSE: AMQ; OTCQB: AMQFF", type: "EXPLORER", location: "CANADA/QC", commodities: "Cu", website: "https://abitibimetals.com"},
+            {name: "ABRA SILVER RESOURCE CORP.", ticker: "TSX-V: ABRA; OTCQX: ABBRF", type: "DEVELOPER", location: "ARGENTINA", commodities: "Au, Ag", website: "https://www.abrasilver.com"},
+            {name: "AGNICO EAGLE MINES LIMITED", ticker: "TSX: AEM; NYSE: AEM", type: "PRODUCER", location: "GLOBAL", commodities: "Au", website: "https://agnicoeagle.com/English/home/default.aspx"},
+            {name: "AMEX EXPLORATION INC.", ticker: "TSX-V: AMX; OTCQX: AMXEF", type: "EXPLORER", location: "CANADA/QC", commodities: "Au", website: "https://www.amexexploration.com"},
+            {name: "ANDEAN PRECIOUS METALS CORP.", ticker: "TSX: APM; OTCQX: ANPMF", type: "PRODUCER", location: "USA/CA; MEXICO; BOLIVIA", commodities: "Au, Ag", website: "https://andeanpm.com"},
+            {name: "ARIZONA METALS CORP", ticker: "TSX: AMC; OTCQX: AZMCF", type: "EXPLORER", location: "USA/AZ", commodities: "Au, Cu", website: "https://www.arizonametalscorp.com"},
+            {name: "ATHA ENERGY CORP", ticker: "TSX-V: SASK; OTCQB: SASKF", type: "DEV/EXPL", location: "CANADA/NV, SK", commodities: "U308", website: "https://athaenergy.com"},
+            {name: "AURANIA RESOURCES LTD.*", ticker: "TSX-V: ARU; OTCQB: AUIAF", type: "EXPLORER", location: "ECUADOR", commodities: "Au", website: "https://aurania.com"},
+            {name: "BRUNSWICK EXPLORATION INC.#", ticker: "TSX-V: BRW; OTCQB: BRWXF", type: "DEV/EXPL", location: "CANADA/QC", commodities: "Li", website: "https://brwexplo.ca"},
+            {name: "BUNKER HILL MINING CORP", ticker: "TSX-V: BNKR; OTCQB: BHLL", type: "DEVELOPER", location: "USA/ID, CO", commodities: "Ag, Pb, Zn", website: "https://www.bunkerhillmining.com"},
+            {name: "CALIBRE MINING CORP.", ticker: "TSX: CXB; OTCQX: CXBMF", type: "PRODUCER", location: "CANADA/NFLD; USA; NICARAGUA", commodities: "Au", website: "https://www.calibremining.com"},
+            {name: "CANTERRA MINERALS CORPORATION*", ticker: "TSX-V: CTM; OTCQB: CTMCF", type: "EXPLORER", location: "CANADA/NFLD, AB", commodities: "Cu, Zi, Pb, Au", website: "https://canterraminerals.com/"},
+            {name: "COLLECTIVE MINING LTD.", ticker: "TSX: CNL; NYSE: CNL", type: "EXPLORER", location: "COLOMBIA", commodities: "Au, Ag, Cu", website: "https://www.collectivemining.com"},
+            {name: "DRYDEN GOLD *", ticker: "TSX-V: DRY; OTCQB: DRYGF", type: "EXPLORER", location: "CANADA/ON", commodities: "Au", website: "https://drydengold.com"},
+            {name: "EXPLOITS DISCOVERY CORP.*", ticker: "CSE: NFLD; OTCQB: NFLDF", type: "EXPLORER", location: "CANADA/NFLD", commodities: "Au", website: "https://exploitsdiscovery.com"},
+            {name: "FIREFLY METALS LTD", ticker: "ASX: FFM; TSX: FFM", type: "EXPLORER", location: "CANADA/NFLD", commodities: "Cu, Au", website: "https://fireflymetals.com.au"},
+            {name: "FIREWEED METALS CORP.", ticker: "TSX-V: FWZ; OTCQX: FWEDF", type: "EXPLORER", location: "CANADA/YK, NWT", commodities: "Zn, Pb, Ag, W, Ge, Ga", website: "https://fireweedmetals.com"},
+            {name: "FIRST MINING GOLD CORP#", ticker: "TSX: FF; OTCQX: FFMGF", type: "DEV/EXPL", location: "CANADA/ON, QC, NFLD", commodities: "Au", website: "https://firstmininggold.com"},
+            {name: "STRIKEPOINT GOLD INC.^^", ticker: "TSX-V: SKP; OTCQB: STKXF", type: "EXPLORER", location: "CANADA/BC; USA/NV", commodities: "Au, Ag", website: "https://strikepointgold.com"},
+            {name: "GRID METALS CORP^^", ticker: "TSX-V: GRDM; OTCQB: MSMGF", type: "EXPLORER", location: "CANADA/MB", commodities: "Li, Cu, Ni", website: "https://gridmetalscorp.com/"},
+            {name: "GLENCORE PLC / GLENCORE CANADA", ticker: "LSE: GLEN; JSE: GLN", type: "PRODUCER", location: "CANADA/GLOBAL", commodities: "Cu, Ni, Zn, Pb", website: "https://www.glencore.ca/en/"},
+            {name: "GOLD ROYALTY CORP", ticker: "NYSE: GROY", type: "ROYALTY", location: "GLOBAL", commodities: "Royalties", website: "https://www.goldroyalty.com"},
+            {name: "KENORLAND MINERALS LTD.", ticker: "TSX-V: KLD; OTCQX: KLDCF", type: "EXPLORER", location: "CANADA/QC", commodities: "Au", website: "https://www.kenorlandminerals.com"},
+            {name: "KIRKLAND LAKE DISCOVERIES*", ticker: "TSX-V: KLDC", type: "EXPLORER", location: "CANADA/ON", commodities: "Au", website: "https://www.kirklandlakediscoveries.com"},
+            {name: "LAVRAS GOLD CORP.", ticker: "TSX-V: LGC; OTCQX: LGCFF", type: "EXPLORER", location: "BRAZIL", commodities: "Au", website: "https://lavrasgold.com"},
+            {name: "MAPLE GOLD MINES LTD", ticker: "TSX-V: MGM; OTCQB: MGMLF", type: "EXPLORER", location: "CANADA/QC", commodities: "Au", website: "https://www.maplegoldmines.com/index.php/en/"},
+            {name: "MARITIME RESOURCES CORP", ticker: "TSX-V: MAE", type: "DEV/EXPL", location: "CANADA/NFLD", commodities: "Au", website: "https://maritimeresourcescorp.com"},
+            {name: "MIDLAND EXPLORATION INC.*", ticker: "TSX-V: MD", type: "EXPLORER", location: "CANADA/QC", commodities: "Au, PGE's", website: "https://midlandexploration.com/en/"},
+            {name: "MINEROS S.A.", ticker: "TSX: MSA", type: "PRODUCER", location: "COLOMBIA; CHILE; NICARAGUA", commodities: "Au", website: "https://mineros.com.co/en/"},
+            {name: "NEW GOLD INC.", ticker: "TSX: NGD; NYSE: NGD", type: "PRODUCER", location: "CANADA/ON, BC", commodities: "Au", website: "https://newgold.com/home/default.aspx"},
+            {name: "NUVAU MINERALS CORP.*", ticker:"TSX-V: NMC", type: "EXPLORER", location: "CANADA/QC", commodities: "Zn, Cu", website: "http://nuvauminerals.com"},
+            {name: "OSISKO DEVELOPMENT CORP.", ticker: "TSX-V: ODV; NYSE: ODV", type: "PRODUCER", location: "CANADA/BC; USA/UT", commodities: "Au", website: "https://osiskodev.com"},
+            {name: "OSISKO GOLD ROYALTIES LTD.", ticker: "TSX: OR; NYSE: OR", type: "ROYALTY", location: "GLOBAL", commodities: "Royalties", website: "https://osiskogr.com/en/"},
+            {name: "OSISKO METALS INCORPORATED#", ticker: "TSX-V: OM; OTCQX: OMZNF", type: "DEV/EXPL", location: "CANADA/QC, NT", commodities: "Cu, Zn", website: "https://osiskometals.com/"},
+            {name: "PATRIOT BATTERY METALS INC.", ticker: "TSX: PMET; ASX: PMT; OTCQX: PMETF", type: "EXPL/DEV", location: "CANADA/QC", commodities: "Li", website: "https://patriotbatterymetals.com/"},
+            {name: "PELOTON MINERALS CORPORATION*", ticker: "CSE: PMC; OTCQB: PMCCF", type: "EXPLORER", location: "USA/NV", commodities: "Li", website: "https://pelotonminerals.com/"},
+            {name: "POWER METALLIC MINES INC.#", ticker: "TSX-V: PNPN; OTCQB: PNPNF", type: "EXPLORER", location: "CANADA/QC", commodities: "Ni", website: "https://powernickel.com/"},
+            {name: "QUIMBAYA GOLD INC.^^", ticker: "CSE: QIM; OTCQB: QIMGF", type: "EXPLORER", location: "COLOMBIA", commodities: "Au", website: "https://www.quimbayagold.com/"},
+            {name: "RADISSON MINING RESOURCES INC.", ticker: "TSX-V: RDS; OTCQB: RMRDF", type: "EXPLORER", location: "CANADA/QC", commodities: "Au", website: "https://www.radissonmining.com/"},
+            {name: "RED PINE EXPLORATION*", ticker: "TSX-V: RPX; OTCQB: RDEXF", type: "EXPLORER", location: "CANADA/ON", commodities: "Au", website: "https://redpineexp.com/"},
+            {name: "SAYONA MINING LTD.", ticker: "ASX: SYA; OTCQB: SYAXF", type: "DEV/EXPL", location: "CANADA/QC; AUSTRALIA", commodities: "Li", website: "https://sayonamining.com.au"},
+            {name: "SILVER ONE RESOURCES INC", ticker: "TSX-V: SVE; OTCQX: SLVRF", type: "EXPL/DEV", location: "USA/NV", commodities: "Ag", website: "https://silverone.com/"},
+            {name: "SIRIOS RESOURCES INC.*", ticker: "TSX-V: SOI; OTCQB: SIREF", type: "EXPLORER", location: "CANADA/QC", commodities: "Au", website: "https://www.sirios.com/en/"},
+            {name: "STRATEGIC RESOURCES INC.", ticker: "TSX-V: SR", type: "DEVELOPER", location: "CANADA/QC; FINLAND", commodities: "V, Ti, Fe", website: "https://strategic-res.com/"},
+            {name: "TROILUS GOLD CORP", ticker: "TSX: TLG; OTCQX: CHXMF", type: "DEV/EXPL", location: "CANADA/QC", commodities: "Au", website: "https://troilusgold.com/"},
+            {name: "UNIGOLD INC.*", ticker: "TSX-V: UGD; OTCQX: UGDIF", type: "EXPLORER", location: "CARRIBEAN", commodities: "Au", website: "https://www.unigoldinc.com/"},
+            {name: "VIZSLA SILVER CORP", ticker: "TSX-V: VZLA; NYSE: VZLA", type: "DEVELOPER", location: "MEXICO", commodities: "Ag", website: "https://vizslasilvercorp.com/"},
+            {name: "WALLBRIDGE MINING COMPANY LIMITED", ticker: "TSX: WM; OTCQB: WLBMF", type: "EXPL/DEV", location: "CANADA/QC", commodities: "Au", website: "https://wallbridgemining.com/"},
+            {name: "WESDOME GOLD MINES LTD.", ticker: "TSX: WDO; OTCQX: WDOFF", type: "PRODUCER", location: "CANADA/QC, ON", commodities: "Au", website: "https://www.wesdome.com/"},
+            {name: "WEST RED LAKE GOLD MINES LTD.", ticker: "TSX-V: WRLG; OTCQB: WRLGF", type: "EXPLORER", location: "CANADA/ON", commodities: "Au", website: "https://westredlakegold.com/"},
+            {name: "ANGUS GOLD INC.~", ticker: "TSX-V: GUS; OTCQB: ANGVF", type: "EXPLORER", location: "CANADA/ON", commodities: "Au", website: "https://www.angusgold.com/"},
+            {name: "MAX RESOURCE CORP", ticker: "TSX-V: MAX", type: "EXPLORER", location: "BRAZIL; COLOMBIA", commodities: "Cu, Fe", website: "http://www.maxresource.com/"},
+            {name: "Li-FT POWER LTD.", ticker: "TSX-V: LIFT; OTCQX: LIFFF", type: "EXPLORER", location: "CANADA/NWT, QC", commodities: "Li", website: "https://www.li-ft.com/"},
+            {name: "ORVANA MINERALS CORP* ", ticker: "TSX: ORV", type: "PRODUCER", location: "SPAIN, ARGENTINA, BOLIVIA", commodities: "Au, Cu, Ag", website: "https://www.orvana.com/English/home/default.aspx"},
+            {name: "DOLLY VARDEN SILVER CORP", ticker: "TSX-V: DV; OTCQX: DOLLF", type: "EXPLORER", location: "CANADA/BC", commodities: "Ag, Au", website: "https://dollyvardensilver.com/"},
+            {name: "VALKEA RESOURCES CORP", ticker: "TSX-V: OZ", type: "EXPLORER", location: "FINLAND", commodities: "Au", website: "https://www.valkea.ca"},
+            {name: "VIOR INC.", ticker: "TSX-V: VIO; OTCQB: VIORF", type: "EXPLORER", location: "CANADA/QC", commodities: "Au, Ni", website: "https://www.vior.ca"},
+            {name: "IAMGOLD CORPORATION", ticker: "TSX: IMG; NYSE: IAG", type: "PRODUCER", location: "CANADA/QC; WEST AFRICA", commodities: "Au, Ag", website: "https://www.iamgold.com"},
+            {name: "APOLLO SILVER CORP", ticker: "TSX-V: APGO; OTCQB: APGOF", type: "DEV/EXPL/PRO", location: "USA/MEXICO", commodities: "Ag", website: "https://apollosilver.com/"},
+            {name: "WHEATON PRECIOUS METALS CORP.", ticker: "TSX: WPM; NYSE: WPM", type: "ROYALTIES/STREAMING", location: "GLOBAL", commodities: "Au", website: "https://wheatonpm.com/overview/default.aspx"},
+            {name: "EMPEROR METALS INC. ^^*", ticker: "CSE: AUOZ; OTCQB: EMAUF", type: "EXPLORER", location: "CANADA/QC", commodities: "Au", website: "https://emperormetals.com"},
+            {name: "EXIRO MINERALS CORP.*", ticker: "PRIVATE", type: "EXPLORER", location: "CANADA/MB", commodities: "Au, Cu, Ni", website: "https://www.exirominerals.com/"},
+            {name: "GOLDEN CARIBOO RESOURCES LTD^^", ticker: "CSE: GCC; OTCQB: GCCFF", type: "EXPLORER", location: "CANADA/BC", commodities: "Au", website: "https://goldencariboo.com"},
+            {name: "MAGNA MINING INC.", ticker: "TSX-V: NICU; OTCQB: MGMNF", type: "Producer", location: "CANADA/ON", commodities: "Ni, Cu", website: "https://magnamining.com/"},
+            {name: "Q2 METALS CORP.#", ticker: "TSX-V: QTWO; OTCQB: QUEXF", type: "EXPLORER", location: "CANADA/QC", commodities: "Li", website: "https://www.q2metals.com/"},
+            {name: "MANDALAY RESOURCES CORPORATION", ticker: "TSX: MND; OTCQB: MNDJF", type: "PRODUCER", location: "SWEDEN, AUSTRALIA", commodities: "Au, Sb", website: "https://mandalayresources.com/"},
+            {name: "SILVER X MINING CORP.*", ticker: "TSX-V: AGX; OTCQB: AGXPF", type: "PRODUCER", location: "PERU", commodities: "Ag, Au, Zn, Pb", website: "https://www.silverxmining.com/"},
+            {name: "FIRST PHOSPHATE CORP.*", ticker: "CSE: PHOS; OTCQB: FRSPF; FSE: KD0", type: "DEVELOPER", location: "CANADA/QC", commodities: "Battery, P2O5", website: "https://firstphosphate.com"},
+            {name: "NIOBAY METALS INC.^^", ticker: "TSX-V: NBY; OTCQB: NBYCF", type: "EXPLORER", location: "CANADA/QC, ON", commodities: "Nb, Ti, Ta", website: "https://niobaymetals.com/en/"},
+            {name: "DYNASTY GOLD CORP*", ticker: "TSX-V: DYG", type: "EXPLORER", location: "CANADA/ON, USA/NV", commodities: "Au", website: "https://dynastygoldcorp.com"},
+            {name: "EQUITY METALS CORPORATION*", ticker: "TSX-V: EQTY; OTCQB: EQMEF", type: "EXPL/DEV", location: "CANADA/BC", commodities: "Au, Ag", website: "https://equitymetalscorporation.com"},
+            {name: "HARFANG EXPLORATION INC^^", ticker: "TSX-V: HAR", type: "EXPLORER", location: "CANADA/ON, QC", commodities: "Au", website: "https://harfangexploration.com"},
+            {name: "JUNO CORP.*", ticker: "PRIVATE", type: "EXPLORER", location: "CANADA/ON", commodities: "Cu, Au, Ti, V, Sc, PGE", website: "https://junocorp.com"},
+            {name: "STANDARD URANIUM LTD*", ticker: "TSX-V: STND; OTCQB: STTDF", type: "EXPL/DEV", location: "CANADA/SK", commodities: "U", website: "https://standarduranium.ca"},
+            {name: "YUKON METALS CORP*", ticker: "CSE: YMC; OTCQB: YMMCF", type: "EXPLORER", location: "CANADA/YK", commodities: "Cu, Au, Ag, Pb, Zn", website: "https://yukonmetals.com"},
+            {name: "MINES D'OR ORBEC INC.^^", ticker: "TSX-V: BLUE", type: "EXPLORER", location: "CANADA/QC", commodities: "Au, Base Metals", website: "https://bluethundermining.com"},
+            {name: "CUPANI METALS CORPORATION*", ticker: "CSE: CUPA", type: "EXPLORER", location: "CANADA/QC", commodities: "Cu", website: "https://www.capitalight.co"},
+            {name: "LITHIUM ROYALTY CORP", ticker: "TSX: LIRC", type: "ROYALTY", location: "GLOBAL", commodities: "Royalties", website: "https://www.lithiumroyaltycorp.com/home/default.aspx"},
+            {name: "XXIX METALS CORP.*", ticker: "TSX-V: XXIX; OTCQB: QCCUF", type: "EXPL/DEV", location: "CANADA/QC", commodities: "Cu, Ag", website: "https://qccopper.com/"},
+            {name: "NEWCORE GOLD LTD.", ticker: "TSX-V: NCAU; OTCQX: NCAUF", type: "EXPL/DEV", location: "AFRICA", commodities: "Au", website: "https://www.newcoregold.com"},
+            {name: "OROGEN ROYALTIES INC.", ticker: "TSX-V: OGN; OTCQB: OGNRF", type: "ROYALTIES", location: "GLOBAL", commodities: "Au, Ag", website: "https://orogenroyalties.com/"},
+            {name: "OPUS ONE GOLD CORPORATION^^", ticker: "TSX-V: OOR", type: "EXPLORER", location: "CANADA/QC", commodities: "Au", website: "https://www.opusoneresources.com/en/"},
+            {name: "CYGNUS METALS LIMITED", ticker: "TSX-V: CYG; OTCQB: CYGGF", type: "DEV/EXPL", location: "CANADA/QC", commodities: "Au, Cu", website: "https://www.dorecopper.com/en/"},
+            {name: "RESOURO STRATEGIC METALS INC*", ticker: "TSX-V: RSM; OTCQB: RSGOF", type: "EXPLORER", location: "BRAZIL", commodities: "REEs, Ti, Au", website: "https://www.resouro.com"},
+            {name: "1911 GOLD CORPORATION*", ticker: "TSX-V: AUMB; OTCQB: AUMBF", type: "DEV/EXPL", location: "CANADA/ON, MB", commodities: "Au", website: "https://www.1911gold.com"},
+            {name: "SPANISH MOUNTAIN GOLD", ticker: "TSX-V: SPA; OTCQB: SPAZF", type: "EXP/DEV", location: "CANADA/BC", commodities: "Au", website: "https://spanishmountaingold.com/"},
+            {name: "NORTHISLE COPPER & GOLD INC.", ticker: "TSX-V: NCX; ", type: "EXPLORER", location: "CANADA/BC", commodities: "Au, Cu", website: "https://www.northisle.ca/"},
+            {name: "SUN SUMMIT MINERALS CORP.*", ticker: "TSX-V: SMN; OTCQB: SMREF", type: "EXPLORER", location: "CANADA", commodities: "Au, Ag, Cu, Zn", website: "Https://sunsummitminerals.com/"},
+            {name: "NEW FOUND GOLD. CORP.#", ticker: "TSX-V: NFG; NYSE-A: NFGC", type: "DEVELOPER", location: "CANADA/NFLD", commodities: "Au", website: "https://newfoundgold.ca/"},
+            {name: "NATIONS ROYALTY CORP.", ticker: "TSX-V: NRC; OTCQB: NRYCF", type: "ROYALTY", location: "CANADA", commodities: "Royalties", website: "https://nationsroyalty.ca/"},
+            {name: "PROBE GOLD INC.~", ticker: "TSX: PRB ; OTCQB: PROBF", type: "PRODUCER", location: "CANADA/QC", commodities: "Au", website: "https://probegold.com/"},
+            {name: "US GOLD CORP", ticker: "NASDAQ: USAU", type: "DEV/EXPL", location: "USA/WY, NV,ID", commodities: "Au, Cu", website: "https://www.usgoldcorp.com/"},
+            {name: "STILLWATER CRITICAL MINERALS CORP.*", ticker: "TSX-V: PGE; OCTQB: PGEZF", type: "EXPLORER", location: "USA/MT", commodities: "Ni, PGE, Cu, Co, Au", website: "https://criticalminerals.com/"},
+            {name: "CASCADIA MINERALS LTD.^^", ticker: "TSX-V: CAM; OTCQB: CAMNF", type: "EXPLORER", location: "CANADA/YK, BC", commodities: "Au, Ag, Cu", website: "https://cascadiaminerals.com/"},
+            {name: "LATIN METALS INC ^^", ticker: "TSX.V: LMS; OTCQB: LMSQF ", type: "EXPLORER", location: "PERU; ARGENTINA", commodities: "Au, Ag, Cu", website: "https://latin-metals.com/"},
+            {name: "SCORPIO GOLD CORPORATION*", ticker: "TSX-V: SGN; OTCQB: SRCRF", type: "EXPLORER", location: "USA/NV", commodities: "Au", website: "https://scorpiogold.com/"},
+            {name: "MINÉRAUX STRATÉGIQUES ABITIBI INC.*", ticker: "PRIVATE", type: "EXPLORER", location: "CANADA/QC", commodities: "Ni", website: "https://www.kinterracapital.com/#values"},
+            {name: "PINNACLE GOLD AND SILVER CORP.^^", ticker: "TSX-V: PINN", type: "EXPLORER", location: "CANADA; MEXICO", commodities: "Au, Ag, Cu", website: "https://pinnaclesilverandgold.com/"},
+            {name: "PASOFINO GOLD CORP.*", ticker: "TSX-V: VEIN; OTCQB:EFRGF", type: "EXPLORER", location: "LIBERIA", commodities: "Au", website: "https://www.pasofinogold.com/home/default.aspx"},
+            {name: "ALTIUS MINERALS CORPORATION", ticker: "TSX: ALS; OTCQX: ATUSF", type: "ROYALTIES", location: "GLOBAL", commodities: "K, C, Cu, Li, Ni, Co, U, Zi, Fe", website: "https://www.altiusminerals.com/"},
+            {name: "SRQ RESOURCES INC.^^", ticker: "TSX-V: SRQ", type: "EXPLORER", location: "CANADA/QC", commodities: "Ni, Cu, Pt", website: "https://www.srqexploration.com/"},
+            {name: "BLUE LAGOON RESOURCES INC*", ticker: "CSE: BLLG; OTCQB: BLAGF", type: "DEVELOPER", location: "CANADA/BC", commodities: "Au", website: "https://bluelagoonresources.com/"},
+            {name: "GREEN LIGHT METALS*", ticker: "TSX-V: GRL", type: "EXPLORER", location: "USA/WI", commodities: "Au, Cu, Zn", website: "https://www.greenlightmetals.com/"},
+            {name: "PIVOTAL METALS*", ticker: "ASX:PVT", type: "EXPLORER", location: "CANADA/QC", commodities: "Cu, Ni, PGM", website: "https://pivotalmetals.com/"},
+            {name: "CENTERRA GOLD INC ~", ticker: "TSX: CG ; NYSE: CGAU", type: "DEV/EXPL/ PRO", location: "CANADA/ BC ;USA/ NV ; TURKEY", commodities: "Au, Cu", website: "https://www.centerragold.com"},
+            {name: "KONE MINING HOLDINGS INC.^^", ticker: "PRIVATE", type: "EXPLORER", location: "Africa/ Mali", commodities: "Au", website: "PRIVATE"},
+            {name: "ONYX GOLD CORP*", ticker: "TSX-V: ONYX; OTCQX: ONXGF", type: "EXPLORER", location: "CANADA/YK, ON", commodities: "Ag", website: "https://onyxgold.com"},
+            {name: "CARTIER RESOURCES INC.*", ticker: "TSX-V: ECR", type: "EXPLORER", location: "CANADA/QC", commodities: "Au, Ag, Cu, Zn", website: "https://ressourcescartier.com"},
+            {name: "iMETAL RESOURCES INC.^^", ticker: "TSX-V: IMR; OTCQB: IMRFF", type: "EXPLORER", location: "CANADA/QC, ON", commodities: "Au", website: "https://imetalresources.ca/"},
+            {name: "LIBRA ENERGY MATERIALS ^^", ticker: "PRIVATE", type: "EXPLORER", location: "CANADA/ON, QC", commodities: "Li", website: "https://libraenergymaterials.com/"},
+            {name: "ARGENTA SILVER CORP*", ticker: "TSX-V: AGAG; OTCQB: AGAGF", type: "EXPLORER", location: "ARGENTINA", commodities: "Ag", website: "https://argentasilver.com/"},
+            {name: "WESTERN EXPLORATION INC.^^", ticker: "TSX-V: WEX; OTCQX: WEXPF", type: "EXPLORER", location: "USA/NEVADA", commodities: "Au", website: "https://www.westernexploration.com/home/default.aspx"},
+            {name: "AXCAP VENTURES INC*", ticker: "CSE: AXCP", type: "EXPLORER", location: "CANADA/BC, USA", commodities: "Au", website: "https://axcapventures.webflow.io/"},
+            {name: "COMMERCE RESOURCES CORP. ~", ticker: "TSX-V: CCE; OTC:CMRZF", type: "EXPLORER", location: "CANADA/QC", commodities: "REEs", website: "https://commerceresources.com/"},
+            {name: "EMPRESS ROYALTY CORP ~", ticker: "TSX-V: EMPR; OTCQX: EMPYF", type: "ROYALTY", location: "GLOBAL", commodities: "Royalties", website: "https://empressroyalty.com"},
+            {name: "LOYALIST EXPLORATION LIMITED ~", ticker: "CSE: PNGC", type: "EXPLORER", location: "CANADA/ON", commodities: "Au, Ag, Ni, Cu", website: "https://loyalistexp.ca/"},
+            {name: "NAMIB MINERALS*", ticker: "PRIVATE", type: "PRODUCER", location: "AFRICA/ZW; DRC", commodities: "Au, Cu, Co", website: "https://www.namibminerals.com/index.html"},
+            {name: "TARGA EXPLORATION CORP.^^", ticker: "CSE: TEX; OTCQB: TRGEF", type: "EXPLORER", location: "CANADA/QC", commodities: "Au", website: "https://targaexploration.com/"},
+            {name: "ARGO GOLD INC. ~", ticker: "TSX-V: ARQ: OTCQB: ARBTF", type: "EXPLORER", location: "CANADA/ON", commodities: "Au", website: "https://argogold.com/"},
+            {name: "E POWER RESOURCES^^", ticker: "CSE: EPR", type: "EXPLORER", location: "CANADA/QC", commodities: "C", website: "https://e-powerresources.com/"},
+            {name: "FPX NICKEL CORP ~", ticker: "TSX-V: FPX; OTCQB: FPOCF", type: "DEVELOPER", location: "CANADA/BC", commodities: "Ni", website: "https://fpxnickel.com/"},
+            {name: "METALQUEST MINING INC.^^", ticker: "TSX-V: MQM; OTCQB: MQMIF", type: "EXPLORER", location: "CANADA/QC", commodities: "Fe", website: "https://metalquestmining.com/"},
+            {name: "Ni-Co ENERGY INC.^^", ticker: "PRIVATE", type: "EXPLORER", location: "CANADA/QC", commodities: "Ni, Cu, Co", website: "https://nicoenergy.ca/"},
+            {name: "LOYALTIST EXPLORATION LTD.", ticker: "CSE: PNGC", type: "EXPLORER", location: "CANADA/ON", commodities: "Au", website: "https://loyalistexp.ca/"},
+            {name: "MAGMA SILVER CORP. ~", ticker: "TSX-V: MGMA", type: "EXPLORER", location: "PERU", commodities: "Ag, Au", website: "https://magmasilver.com/"},
+            {name: "LOYALTIST EXPLORATION LTD.", ticker: "CSE: PNGC", type: "EXPLORER", location: "CANADA/ON", commodities: "Au", website: "https://loyalistexp.ca/"},
+            {name: "MAGMA SILVER CORP.", ticker: "TSX-V: MGMA", type: "EXPLORER", location: "PERU", commodities: "Ag, Au", website: "https://magmasilver.com/"}
+
+// Add more companies...    
+                      ];
+
+  // Sort direction tracker for each column
+  let sortDirections = [true, true, true, true, true];
+
+  function populateTable() {
+    const tableBody = document.getElementById('companyTableBody');
+    tableBody.innerHTML = '';
+    companies.forEach((company) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><a href="${company.website}" target="_blank">${company.name}</a></td>
+        <td>${company.ticker}</td>
+        <td>${company.type}</td>
+        <td>${company.location}</td>
+        <td>${company.commodities}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+  function sortTable(columnIndex) {
+    const tbody = document.getElementById("companyTableBody");
+    const rows = Array.from(tbody.rows);
+    sortDirections[columnIndex] = !sortDirections[columnIndex];
+    const ascending = sortDirections[columnIndex];
+
+    rows.sort((a, b) => {
+      const cellA = a.cells[columnIndex].innerText.trim();
+      const cellB = b.cells[columnIndex].innerText.trim();
+      return cellA.localeCompare(cellB, undefined, { numeric: true, sensitivity: 'base' }) * (ascending ? 1 : -1);
+    });
+
+    tbody.innerHTML = '';
+    rows.forEach(row => tbody.appendChild(row));
+  }
+
+  window.onload = populateTable;
+</script>
